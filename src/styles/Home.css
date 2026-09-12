@@ -1,0 +1,75 @@
+.whats-on-mind-container > p,
+.top-restraurant-container > p {
+  font-size: 20px;
+  font-weight: 600;
+}
+.home-container {
+  padding: 20px;
+}
+.collectons-items {
+  display: flex;
+}
+.collection-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+.whats-on-mind-container {
+  border-bottom: 1px solid rgb(210, 207, 207);
+}
+.top-restraurant-container {
+  padding: 20px 0;
+}
+.restraurant-items {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.restraurant-card {
+  width: 250px;
+  height: 300px;
+  border-radius: 5px;
+  padding: 10px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.restraurant-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 18px rgb(0 0 0 / 0.15);
+}
+
+.res-image {
+  width: 100%;
+  height: 180px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.rating-section {
+  display: flex;
+  gap: 5px;
+}
+.rating-icon {
+  color: rgb(1, 85, 2);
+}
+.slaString {
+  font-size: 17px;
+  font-weight: 600;
+}
+.restraurant-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cuisines-section {
+  font-size: 14px;
+  color: rgb(128, 128, 128);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.restraurant-locality {
+  font-size: 14px;
+  padding-top: 5px;
+  color: rgb(128, 128, 128);
+}

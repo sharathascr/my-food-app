@@ -1,0 +1,11 @@
+.search-restraurant-section {
+  margin: 40px 0;
+}
+.restaurants-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.search-header {
+  display: block;
+}

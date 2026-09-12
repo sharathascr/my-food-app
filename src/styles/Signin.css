@@ -1,0 +1,46 @@
+.signin-container {
+  border: 1px solid gray;
+  border-radius: 5px;
+  width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+.signin-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.signin-container input {
+  display: block;
+  width: 97%;
+  margin-bottom: 10px;
+  padding: 4px;
+}
+
+.signin-container button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-field-level-errors {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.password-section{
+  position: relative;
+}
+.password-icons {
+  display: inline;
+  position: absolute;
+  right: 10px;
+  bottom: 2px;
+}

@@ -1,0 +1,17 @@
+.profile-page {
+  margin: 40px auto;
+}
+
+.profile-container {
+  width: 400px;
+}
+
+.profile-container p {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  margin: 10px 0;
+}
+
+.profile-container p span:first-child {
+  font-weight: 600;
+}
