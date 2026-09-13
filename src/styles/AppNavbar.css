@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgb(210, 207, 207);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 .nav-items-section {
   margin: 20px;
@@ -16,5 +19,33 @@
   list-style-type: none;
 }
 .nav-logo {
-  width: 100px;
+  width: 60px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  color: orangered;
+  border-bottom: 1px solid orangered;
+}
+
+.nav-items-section .active {
+  color: orangered;
+  border-bottom: 1px solid orangered;
+}
+.cart-count {
+  color: green;
+  font-weight: bold;
+}
+.logout-button {
+  background: none;
+  border: none;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
 }

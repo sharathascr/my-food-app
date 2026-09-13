@@ -6,7 +6,12 @@ const router = express.Router();
 
 router.get("/cart", userAuth, async (req, res) => {
   const cart = await cartModal.find({ userId: req.user.id });
-  res.send({ success: true, message: "Fetched cart successfully", cart });
+  res.send({
+    success: true,
+    message: "Fetched cart successfully",
+    cart,
+    cartCount: cart.length,
+  });
 });
 
 router.post("/cart/add", userAuth, async (req, res) => {

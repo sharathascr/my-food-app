@@ -1,14 +1,19 @@
 import CartItem from "../components/CartItem";
 import "../styles/Cart.css";
 import { useFetch } from "../custom-hooks/useFetch.js";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setCartCount } from "../store/slices/CartSlice.js";
 
 function Cart() {
+  const dispatch = useDispatch();
   const {
     data: { cart = [] } = {},
     isLoading,
     error,
     refetch: refetchCart,
   } = useFetch("http://localhost:7777/cart");
+
 
   const {
     data: { totalAmount, discount, discountedAmount, grandTotal, taxAmount },
@@ -21,6 +26,10 @@ function Cart() {
     refetchCart();
     refetchAmount();
   };
+
+  useEffect(() => {
+    dispatch(setCartCount(cart.length));
+  }, [cart.length, dispatch]);
 
   return (
     <div className="cart-page">

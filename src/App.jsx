@@ -8,16 +8,18 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <header>
-          <AppNavbar />
-        </header>
-        <main id="app-container">
-          <AppRouter />
-        </main>
-      </BrowserRouter>
-    </Provider>
+    <div className="App">
+      <Provider store={store}>
+        <BrowserRouter>
+          <header>
+            <AppNavbar />
+          </header>
+          <main id="app-container">
+            <AppRouter />
+          </main>
+        </BrowserRouter>
+      </Provider>
+    </div>
   );
 }
 

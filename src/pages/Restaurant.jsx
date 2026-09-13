@@ -6,14 +6,16 @@ import { FaStar } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { IoReturnUpBack } from "react-icons/io5";
+import { setCartIndex } from "../store/slices/CartSlice.js";
 
 function Restraurant() {
   const [restaurant, setRestaurant] = useState(null);
   const { restraurantId } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -34,14 +36,20 @@ function Restraurant() {
     }
 
     const addToCartPayload = { resId: a, item: { ...b } };
-    await axios.post("http://localhost:7777/cart/add", addToCartPayload, {
-      withCredentials: true,
-    });
-    toast.success(`${b.name} added to cart successfully!`, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-    });
+    const addToCartResponse = await axios.post(
+      "http://localhost:7777/cart/add",
+      addToCartPayload,
+      { withCredentials: true },
+    );
+
+    if (addToCartResponse.status === 200 || addToCartResponse.status === 201) {
+      dispatch(setCartIndex());
+      toast.success(`${b.name} added to cart successfully!`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+      });
+    }
   };
 
   if (!restaurant) {
