@@ -1,18 +1,19 @@
 import { MdStars } from "react-icons/md";
 import "../styles/CartItem.css";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateItemQuantity } from "../store/slices/CartSlice";
+import axios from "axios";
 
+function CartItem({ item: cartItem, onRemoved }) {
+  const { item, quantity, _id } = cartItem;
 
-function CartItem({ item }) {
-    const dispatch = useDispatch();
-
-    
-    const [dishQuantity, setDishQuantity] = useState(1);
-    useEffect(() => {
-        dispatch(updateItemQuantity({ itemId: item.id, quantity: dishQuantity }));
-    }, [dishQuantity, dispatch, item.id]);
+  const handleRemove = async () => {
+    const response = await axios.delete("http://localhost:7777/cart/item", {
+      data: { _id },
+      withCredentials: true,
+    });
+    if (response.data.success) {
+      onRemoved();
+    }
+  };
   return (
     <div className="cart-item">
       <div className="cart-item-card">
@@ -20,14 +21,21 @@ function CartItem({ item }) {
           <p className="item-name">{item.name}</p>
           <span className="rating-section">
             <MdStars className="rating-icon" />
-            <span>{item?.ratings.aggregatedRating?.rating}</span>
+            <span>{item?.ratings?.aggregatedRating?.rating}</span>
           </span>
-          <p className="cart-item-price">₹ {item.defaultPrice/100 || item.price/100}</p>
-          <p className="cart-item-description">{item.description}</p>
+          <p className="cart-item-price">
+            ₹ {item?.defaultPrice / 100 || item?.price / 100}
+          </p>
+          <p className="cart-item-description">{item?.description}</p>
           <label>Quantity</label>
-          <button onClick={() => setDishQuantity(dishQuantity + 1)}>+</button>
-          <span className="dish-quantity">{dishQuantity}</span>
-          <button onClick={() => setDishQuantity(dishQuantity > 1 ? dishQuantity - 1 : 1)}>-</button>
+          <button>+</button>
+          <span className="dish-quantity">{quantity}</span>
+          <button>-</button>
+          <div>
+            <button className="cart-remove-button" onClick={handleRemove}>
+              Remove
+            </button>
+          </div>
         </div>
         <div className="cart-item-image">
           <img

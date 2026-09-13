@@ -9,21 +9,18 @@ function Home() {
     isLoading: collectionsLoading,
     error: collectionsError,
   } = useFetch("http://localhost:7777/collections/all");
-  console.log("collections", collections);
 
   const {
     data: { topRestaurants },
     isLoading: topRestraurantsLoading,
     error: topRestraurantsError,
   } = useFetch("http://localhost:7777/restaurant/top");
-  console.log("topRestraurants", topRestaurants);
   const {
     data: { restaurants },
     isLoading: restraurantsLoading,
     error: restraurantsError,
   } = useFetch("http://localhost:7777/restaurant/all");
 
-  console.log("restraurants", restaurants);
   return (
     <div className="home-container">
       <div className="whats-on-mind-container">

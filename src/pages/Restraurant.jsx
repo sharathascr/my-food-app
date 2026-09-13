@@ -10,7 +10,6 @@ function Restraurant() {
   const [restaurant, setRestaurant] = useState(null);
   const { restraurantId } = useParams();
 
-
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
@@ -21,6 +20,18 @@ function Restraurant() {
     fetchData();
     scrollTo(0, 0);
   }, [restraurantId]);
+
+  const handleAddToCart = async (a, b) => {
+    const addToCartPayload = { resId: a, item:{...b} };
+    console.log(JSON.stringify(addToCartPayload, null, 2));
+    const addToCartResponse = await axios.post(
+      "http://localhost:7777/cart/add",
+      addToCartPayload,
+      { withCredentials: true },
+    );
+
+    console.log("addToCartResponse", addToCartResponse);
+  };
 
   if (!restaurant) {
     return <p>Restaurant data is unavailable.</p>;
@@ -78,7 +89,12 @@ function Restraurant() {
                 className="res-dish-image"
                 src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${card.imageId || card.cloudinaryImageId}`}
               />
-              <button className="add-button">Add</button>
+              <button
+                className="add-button"
+                onClick={() => handleAddToCart(restaurant.id, card)}
+              >
+                Add
+              </button>
             </div>
           </div>
         ))}

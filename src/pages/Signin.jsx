@@ -28,7 +28,6 @@ function Signin() {
         },
       );
       if (loginResponse.status === 200) {
-        alert("login successful");
         dispatch(handleLogin(loginResponse.data.userResponse));
         navigate("/");
       }

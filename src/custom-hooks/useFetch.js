@@ -5,6 +5,7 @@ export function useFetch(url, initialData = []) {
   const [data, setData] = useState(initialData);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [requestNumber, setRequestNumber] = useState(0);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -14,6 +15,7 @@ export function useFetch(url, initialData = []) {
       try {
         const response = await axios.get(url, {
           signal: abortController.signal,
+          withCredentials: true,
         });
         setData(response.data);
         setIsLoading(false);
@@ -26,7 +28,9 @@ export function useFetch(url, initialData = []) {
     };
     fetchData(url);
     return () => abortController.abort();
-  }, [url]);
+  }, [url, requestNumber]);
 
-  return { data, isLoading, error };
+  const refetch = () => setRequestNumber((previous) => previous + 1);
+
+  return { data, isLoading, error, refetch };
 }

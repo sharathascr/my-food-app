@@ -17,9 +17,9 @@ export const itemCardSchema = new mongoose.Schema({
         values: ["VEG", "NONVEG"],
         message: "Item veg classifier must be either 'VEG' or 'NONVEG'",
       },
-    },
+    },  
   },
-  defaultPrice: { type: Number, required: [true, "Item price is required"] },
+  defaultPrice: { type: Number },
   showImage: {
     type: Boolean,
   },
