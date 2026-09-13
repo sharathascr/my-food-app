@@ -11,11 +11,6 @@ function Home() {
   } = useFetch("http://localhost:7777/collections/all");
 
   const {
-    data: { topRestaurants },
-    isLoading: topRestraurantsLoading,
-    error: topRestraurantsError,
-  } = useFetch("http://localhost:7777/restaurant/top");
-  const {
     data: { restaurants },
     isLoading: restraurantsLoading,
     error: restraurantsError,
@@ -43,27 +38,7 @@ function Home() {
           </div>
         )}
       </div>
-      <div className="top-restraurant-container">
-        <p>Top Restraurants</p>
-        {topRestraurantsLoading ? (
-          <p>top restraurants loading</p>
-        ) : (
-          <div className="restraurant-items">
-            {topRestraurantsError ? (
-              <p>{topRestraurantsError}</p>
-            ) : (
-              <>
-                {topRestaurants.map((restraurant) => (
-                  <RestraurantCard
-                    key={restraurant.id}
-                    restraurant={restraurant}
-                  />
-                ))}
-              </>
-            )}
-          </div>
-        )}
-      </div>
+
       <div className="top-restraurant-container">
         <p>Restraurants with online delivery</p>
         {restraurantsLoading ? (

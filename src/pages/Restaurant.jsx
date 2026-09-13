@@ -5,10 +5,14 @@ import { LuDot } from "react-icons/lu";
 import { FaStar } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Restraurant() {
   const [restaurant, setRestaurant] = useState(null);
   const { restraurantId } = useParams();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
     async function fetchData() {
@@ -22,7 +26,13 @@ function Restraurant() {
   }, [restraurantId]);
 
   const handleAddToCart = async (a, b) => {
-    const addToCartPayload = { resId: a, item:{...b} };
+    if (!isAuthenticated) {
+      alert("Please login to add items to cart");
+      navigate("/login");
+      return;
+    }
+
+    const addToCartPayload = { resId: a, item: { ...b } };
     console.log(JSON.stringify(addToCartPayload, null, 2));
     const addToCartResponse = await axios.post(
       "http://localhost:7777/cart/add",

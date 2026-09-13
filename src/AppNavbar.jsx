@@ -10,7 +10,8 @@ function AppNavbar() {
   const dispatch = useDispatch();
   const logoutHandler = async () => {
     const logoutResponse = await axios.post(
-      "http://localhost:7777/auth/logout",
+      "http://localhost:7777/auth/logout",{},
+      { withCredentials: true },
     );
     if (logoutResponse.data.success) {
       dispatch(handleLogout());

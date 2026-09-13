@@ -1,4 +1,5 @@
 import express from "express";
+import process from "node:process";
 import User from "../models/userModel.js";
 import userAuth from "../middlewares/userAuth.js";
 
@@ -38,13 +39,22 @@ router.post("/auth/login", async (req, res) => {
     });
 
   const isValidPassword = await user.checkPassword(req.body.password);
-  if (!isValidPassword)
-    res.status(401).send({
+  if (!isValidPassword) {
+    return res.status(401).send({
       success: false,
       message: "Invalid Credentials!!!",
     });
-  res.cookie("loginToken", user.generateJWTtoken());
-  res.send({
+  }
+
+  const token = user.generateJWTtoken();
+  res.cookie("loginToken", token, {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 60 * 60 * 1000,
+  });
+
+  return res.send({
     success: true,
     message: "login successful",
     userResponse: {

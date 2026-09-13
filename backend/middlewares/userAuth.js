@@ -11,18 +11,19 @@ dotenv.config({ path: path.join(__dirname, "../.env") });
 
 const userAuth = (req, res, next) => {
   const token = req.cookies.loginToken;
-  if (!token) {
-    return res
-      .status(401)
-      .send({ message: "Access denied. No token provided." });
-  }
 
   try {
+    if (!token) {
+      return res
+        .status(401)
+        .send({ message: "Access denied. No token provided." });
+    }
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
-    next();
+    return next();
   } catch (error) {
-    res.status(400).send({ message: "Invalid token." + error.message });
+    return res.status(400).send({ message: `Invalid token. ${error.message}` });
   }
 };
 
