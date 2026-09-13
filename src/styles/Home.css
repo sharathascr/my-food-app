@@ -73,3 +73,50 @@
   padding-top: 5px;
   color: rgb(128, 128, 128);
 }
+
+.collections-shimmer-container,
+.restaurant-shimmer-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.collection-shimmer {
+  width: 150px;
+  height: 150px;
+  background: #eee;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 100px;
+}
+
+.collection-shimmer::after,
+.restaurant-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #f8f8f8, transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes collection-shimmer {
+  100% {
+    left: 100%;
+  }
+}
+
+.restaurant-shimmer {
+  width: 250px;
+  height: 200px;
+  background: #eee;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Collections from "../components/Collections";
 import RestraurantCard from "../components/RestraurantCard";
 import { useFetch } from "../custom-hooks/useFetch";
@@ -16,12 +17,24 @@ function Home() {
     error: restraurantsError,
   } = useFetch("http://localhost:7777/restaurant/all");
 
+  useEffect(() => {
+    const scrollPosition = sessionStorage.getItem("homeScrollPosition");
+    if (scrollPosition) {
+      window.scrollTo(0, Number(scrollPosition));
+    }
+  }, [restaurants]);
+
+
   return (
     <div className="home-container">
       <div className="whats-on-mind-container">
         <p>Sharath, what's on your mind?</p>
         {collectionsLoading ? (
-          <p>collections loading</p>
+          <div className="collections-shimmer-container">
+            {Array.from({ length: 5 }, (_, index) => (
+              <div className="collection-shimmer" key={index}></div>
+            ))}
+          </div>
         ) : (
           <div className="collectons-items">
             {collectionsError ? (
@@ -42,7 +55,11 @@ function Home() {
       <div className="top-restraurant-container">
         <p>Restraurants with online delivery</p>
         {restraurantsLoading ? (
-          <p>top restraurants loading</p>
+          <div className="restaurant-shimmer-container">
+            {Array.from({ length: 6 }, (_, index) => (
+              <div key={index} className="restaurant-shimmer"></div>
+            ))}
+          </div>
         ) : (
           <div className="restraurant-items">
             {restraurantsError ? (

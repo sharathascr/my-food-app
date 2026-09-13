@@ -12,12 +12,11 @@ export const itemCardSchema = new mongoose.Schema({
   itemAttribute: {
     vegClassifier: {
       type: String,
-      required: [true, "Item veg classifier is required"],
       enum: {
         values: ["VEG", "NONVEG"],
         message: "Item veg classifier must be either 'VEG' or 'NONVEG'",
       },
-    },  
+    },
   },
   defaultPrice: { type: Number },
   showImage: {

@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import { IoReturnUpBack } from "react-icons/io5";
 
 function Restraurant() {
   const [restaurant, setRestaurant] = useState(null);
@@ -27,20 +29,19 @@ function Restraurant() {
 
   const handleAddToCart = async (a, b) => {
     if (!isAuthenticated) {
-      alert("Please login to add items to cart");
-      navigate("/login");
+      navigate("/signin");
       return;
     }
 
     const addToCartPayload = { resId: a, item: { ...b } };
-    console.log(JSON.stringify(addToCartPayload, null, 2));
-    const addToCartResponse = await axios.post(
-      "http://localhost:7777/cart/add",
-      addToCartPayload,
-      { withCredentials: true },
-    );
-
-    console.log("addToCartResponse", addToCartResponse);
+    await axios.post("http://localhost:7777/cart/add", addToCartPayload, {
+      withCredentials: true,
+    });
+    toast.success(`${b.name} added to cart successfully!`, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+    });
   };
 
   if (!restaurant) {
@@ -49,7 +50,7 @@ function Restraurant() {
   return (
     <div className="restaurant-information">
       <button className="back-button" onClick={() => window.history.back()}>
-        Back
+        <IoReturnUpBack className="back-icon" />
       </button>
       <h1>{restaurant.name}</h1>
       <img
@@ -109,6 +110,7 @@ function Restraurant() {
           </div>
         ))}
       </div>
+      <ToastContainer />
     </div>
   );
 }

@@ -89,3 +89,8 @@
   -webkit-line-clamp: 2; /* show only 2 lines */
   -webkit-box-orient: vertical;
 }
+.back-icon {
+  font-size: 20px;
+  margin-right: 5px;
+  padding: 2px 10px;
+}

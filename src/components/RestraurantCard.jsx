@@ -1,17 +1,17 @@
 import { MdStars } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
+
 function RestraurantCard({ restraurant }) {
   const navigate = useNavigate();
   return (
     <div
       className="restraurant-card"
       key={restraurant?.id || restraurant?.info?.id}
-      onClick={() =>
-        navigate(`/restraurant/${restraurant?.id || restraurant?.info?.id}`, {
-            state:{restraurant}
-        })
-      }
+      onClick={() => {
+        sessionStorage.setItem("homeScrollPosition", window.scrollY);
+        navigate(`/restraurant/${restraurant?.id}`);
+      }}
     >
       <img
         className="res-image"
@@ -24,7 +24,6 @@ function RestraurantCard({ restraurant }) {
         <span className="rating-section">
           <MdStars className="rating-icon" />
           <span>{restraurant.avgRating || restraurant.info.avgRating}</span>
-        
         </span>
         <p className="cuisines-section">
           {restraurant?.cuisines?.join(", ") ||
